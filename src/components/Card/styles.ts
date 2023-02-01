@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ICardStyled } from "./types";
 
 export const CardContainer = styled.div`
     border-radius: 16px;
@@ -9,7 +10,7 @@ export const CardContainer = styled.div`
     overflow: hidden;
 `;
 
-export const CardImage = styled.div`
+export const CardImage = styled.div<ICardStyled>`
     height: 200px;
     width: 100%;
     background: url(${({ image }) => image}) no-repeat center center / cover;

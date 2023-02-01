@@ -1,5 +1,5 @@
-import { Container, Title, Col, Subtitle, LinksWrap } from "./styles";
-import { MdEmail, MdLock } from "react-icons/md";
+import { Container, Title, Col, Subtitle, LinksWrap, Disclaimer } from "./styles";
+import { MdEmail, MdLock, MdPerson } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { api } from "../../services/api";
 import { useForm } from "react-hook-form";
@@ -7,22 +7,24 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import Button from "../../components/Button";
 import Input from "../../components/Input";
+import { IFormData } from "./types";
 
 const schema = yup.object({
+    name: yup.string().required('Campo obrigatório'),
     email: yup.string().email('Este email não é válido').required('Campo obrigatório'),
     password: yup.string().min(6, 'Use no mínimo 6 caracteres').required('Campo obrigatório'),
 }).required();
 
-export function Login() {
+export function Register() {
 
     const navigate = useNavigate();
 
-    const { control, handleSubmit, formState: { errors } } = useForm({
+    const { control, handleSubmit, formState: { errors } } = useForm<IFormData>({
         resolver: yupResolver(schema),
         mode: 'onChange'
     });
 
-    const onSubmit = async formData => {
+    const onSubmit = async (formData: IFormData) => {
         try {
 
             const { data } = await api.get(`users?email=${formData.email}&senha=${formData.password}`);
@@ -55,6 +57,15 @@ export function Login() {
                 <form onSubmit={handleSubmit(onSubmit)}>
 
                     <Input
+                        name="name"
+                        control={control}
+                        leftIcon={<MdPerson />}
+                        type="text"
+                        placeholder="Nome"
+                        errorMsg={errors.name?.message}
+                    />
+
+                    <Input
                         name="email"
                         control={control}
                         leftIcon={<MdEmail />}
@@ -72,13 +83,16 @@ export function Login() {
                         errorMsg={errors.password?.message}
                     />
 
-                    <Button variant="primary" label="Começar agora" type="submit" />
+                    <Button variant="primary" label="Criar minha conta" type="submit" />
 
                 </form>
 
+                <Disclaimer>
+                    Ao clicar em "criar minha conta grátis", declaro que aceito as Políticas de Privacidade e os Termos de Uso da DIO.
+                </Disclaimer>
+
                 <LinksWrap>
-                    <Link className="warning" to="/">Esqueci minha senha</Link>
-                    <Link className="success" to="/">Criar conta</Link>
+                    <p>Já tenho conta. <Link className="success" to="/login">Fazer login</Link></p>
                 </LinksWrap>
             </Col>
 

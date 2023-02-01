@@ -8,7 +8,7 @@ import { Feed } from "./pages/Feed";
 function App() {
   return (
     <div className="App">
-      <Header />
+      <Header autenticado={true} />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />

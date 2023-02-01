@@ -1,6 +1,7 @@
 import styled, { css } from "styled-components";
+import { IButtonStyled } from "./types";
 
-export const Btn = styled.button`
+export const Btn = styled.button<IButtonStyled>`
     border: none;
     color: white;
     cursor: pointer;

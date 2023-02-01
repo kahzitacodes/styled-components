@@ -1,10 +1,13 @@
 import { InputContainer, IconWrap, ErrorText } from "./styles";
 import { Controller } from "react-hook-form";
+import { IInput } from "./types";
 
-export default function Input({ leftIcon, name, errorMsg, control, ...rest }) {
+export default function Input({ leftIcon, name, errorMsg, control, ...rest }: IInput) {
     return (
         <InputContainer>
+
             {leftIcon ? <IconWrap>{leftIcon}</IconWrap> : null}
+
             <Controller
                 defaultValue={''}
                 name={name}
@@ -14,6 +17,7 @@ export default function Input({ leftIcon, name, errorMsg, control, ...rest }) {
             />
 
             {errorMsg ? <ErrorText>{errorMsg}</ErrorText> : null}
+
         </InputContainer>
     );
 }

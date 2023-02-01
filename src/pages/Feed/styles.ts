@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { IFeed } from "./types";
 
 export const Container = styled.main`
     align-items: flex-start;
@@ -10,7 +11,7 @@ export const Container = styled.main`
     gap: 10%;
 `;
 
-export const Col = styled.div`
+export const Col = styled.div<IFeed>`
     flex: ${({ flex }) => flex};
     display: flex;
     flex-direction: column;

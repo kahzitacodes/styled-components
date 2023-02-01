@@ -9,8 +9,9 @@ import {
     SearchBar,
     Nav
 } from "./styles";
+import { IHeader } from "./types";
 
-export default function Header({ autenticado }) {
+export default function Header({ autenticado }: IHeader) {
 
     const navigate = useNavigate();
 

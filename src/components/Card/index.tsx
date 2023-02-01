@@ -1,5 +1,6 @@
 import { MdThumbUp } from "react-icons/md";
 import Avatar from "../Avatar";
+import { ICard } from "./types";
 import {
     CardContainer,
     CardImage,
@@ -10,7 +11,7 @@ import {
     PostLikes
 } from "./styles";
 
-export default function Card({ userPicture, image }) {
+export default function Card({ userPicture, image }: ICard) {
     return (
         <CardContainer>
             <CardImage image={image} />
